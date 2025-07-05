@@ -1,0 +1,212 @@
+import shutil
+import os
+
+print("🎉 Welcome to NamFile Tool 🎉")
+print("Manage your life with one Python script.\n")
+
+# Step 1
+print("main menu")
+def main_menu():
+    print("1) File Checker")
+    print("2) To-Do List")
+    print("3) Contact Book")
+    print("4) Fun & Random Tools\n")
+
+main_menu()
+
+list_task = ["1", "2", "3", "4"]
+task = " "
+while not (task.isdigit() and task in list_task):
+    task = input("How can I help you today?\nEnter number plz 1-4? ")
+print("\n")
+task = int(task)
+print(f"✅ You picked option {task}\n")
+
+# Step 2
+if task == 1:
+    path = input("Enter file path? ")
+    if os.path.exists(path):
+        print("That file location exists. What would you like to do?\n"
+              "1) Read file\n"
+              "2) Write or overwrite the file\n"
+              "3) Move file\n"
+              "4) Copy file\n"
+              "5) Back to main menu")
+
+        file_list = ["1", "2", "3", "4", "5"]
+        file = " "
+        while not (file.isdigit() and file in file_list):
+            file = input("Choose (1-5): ")
+        file = int(file)
+
+        if file == 1:
+            try:
+                with open(path) as f:
+                    print(f.read())
+            except FileNotFoundError:
+                print("❌ That file was not found.")
+
+        elif file == 2:
+            text = input("What would you like to write into the file?\n")
+            try:
+                with open(path, "w") as f:
+                    f.write(text)
+                print("✅ File written successfully.")
+            except:
+                print("❌ Something went wrong writing to the file.")
+
+        elif file == 3:
+            new_location = input("Enter destination path to move file: ")
+            try:
+                shutil.move(path, new_location)
+                print("✅ File moved successfully.")
+            except:
+                print("❌ Error moving file.")
+
+        elif file == 4:
+            destination = input("Enter destination path to copy file: ")
+            try:
+                shutil.copyfile(path, destination)
+                print("✅ File copied successfully.")
+            except:
+                print("❌ Error copying file.")
+
+        elif file == 5:
+            print("🔙 Going back to main menu...")
+            main_menu()
+
+    else:
+        print("❌ That location doesn't exist.")
+
+# Step 3
+if task == 2:
+    print("1) Add list")
+    print("2) View list ")
+    print("3) Remove tasks ")
+    print("4) Store in list")
+    print("5) back to main menu\n")
+
+    to_list = ["1", "2", "3", "4", "5"]
+    do = " "
+    while True:
+        do = input("Choose (1-5): ")
+        if do.isdigit() and do in to_list:
+            do = int(do)
+            break
+        else:
+            print("❌ Invalid input. Please enter a number from 1 to 5.\n")
+
+    dolist = []
+
+    if do == 1:
+        add_list = input("Add to your list? ")
+        dolist.append(add_list)
+        print("Current tasks:")
+        for x in dolist:
+            print(x)
+
+    if do == 2:
+        print("Your to-do list")
+        for x in dolist:
+            print(x)
+
+    if do == 3:
+        print("Your current tasks:")
+        for x in dolist:
+            print("•", x)
+        bye_l = input("Which task do you want to remove? ")
+        if bye_l in dolist:
+            dolist.remove(bye_l)
+            print("✅ Task removed.")
+        else:
+            print("❌ That task is not in your list.")
+
+    if do == 4:
+        add_list = input("Add to your list? ")
+        dolist.append(add_list)
+        print("Stored in list ✅")
+
+    elif do == 5:
+        print("🔙 Going back to main menu...")
+        main_menu()
+
+# Step 4
+if task == 3:
+    print("1) Add contacts")
+    print("2) View contacts")
+    print("3) Remove contacts")
+    print("4) back to main menu\n")
+
+    c_book = ["1", "2", "3", "4"]
+    c = " "
+    while True:
+        c = input("Choose (1-4): ")
+        if c.isdigit() and c in c_book:
+            c = int(c)
+            break
+        else:
+            print("❌ Invalid input. Please enter a number from 1 to 4.\n")
+
+    # make sure your contact list exists
+    contact_list = []
+
+    if c == 1:
+        add_c = input("Add contact (name + number): ")
+        contact_list.append(add_c)
+        print("✅ Contact added.")
+
+    if c == 2:
+        print("📒 Your contacts:")
+        for x in contact_list:
+            print("•", x)
+
+    if c == 3:
+        print("📒 Current contacts:")
+        for x in contact_list:
+            print("•", x)
+        bye_c = input("Which contact to remove? ")
+        if bye_c in contact_list:
+            contact_list.remove(bye_c)
+            print("✅ Contact removed.")
+        else:
+            print("❌ That contact is not in the list.")
+
+    if c == 4:
+        print("🔙 Back to main menu...")
+        main_menu()
+
+import random 
+
+if task == 4:
+	print("let's play some rocks, paper, scissors 😁\ntry to win I bet you can't 🤣\n")
+	choices = ["rock", "paper", "scissors"]
+	computer = random.choice(choices)
+	player = None
+
+	while player not in choices:
+		player = input("rock, paper or scissors? ").lower()
+
+	print("You picked:", player)
+	print("Computer picked:", computer)
+
+	if player == computer:
+		print("😐 It's a tie!")
+	elif player == "rock":
+		if computer == "scissors":
+			print("🎉 You win!")
+		else:
+			print("💀 You lose!")
+	elif player == "paper":
+		if computer == "rock":
+			print("🎉 You win!")
+		else:
+			print("💀 You lose!")
+	elif player == "scissors":
+		if computer == "paper":
+			print("🎉 You win!")
+		else:
+			print("💀 You lose!")
+#		if player 
+	
+
+
